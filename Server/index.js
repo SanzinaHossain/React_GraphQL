@@ -1,26 +1,7 @@
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
 
-const typeDefs = `
-type Query
-{
-
-}
-
-type Mutation
-{
-
-}
-
-type users
-{
-    id: ID
-    name:String
-    age: Int
-    isMarried: Boolean
-}
-
-`
+const typeDefs =``
 const resolvers = {
   
 }
