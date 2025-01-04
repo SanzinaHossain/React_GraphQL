@@ -1,26 +1,5 @@
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
-
-const typeDefs = `
-type Query
-{
- _empty: String
-}
-
-type Mutation
-{
- _empty: String
-}
-
-type users
-{
-    id: ID
-    name:String
-    age: Int
-    isMarried: Boolean
-}
-`
-
 const users = [
   {
     id: 1,
@@ -42,8 +21,39 @@ const users = [
   }
 
 ]
+const typeDefs = `
+type Query
+{
+  getUsers: [User]
+  getUserById(id:ID!):User
+}
+
+type Mutation
+{
+ createUser(name:String!, age :Int! , isMarried: Boolean!): User
+}
+
+type User
+{
+    id: ID
+    name:String
+    age: Int
+    isMarried: Boolean
+}
+`
 const resolvers = {
-  
+  Query: {
+    getUsers: () => {
+      return users;
+      // if user want to fetch data from database like mongodb just write the collection format to fetch all the users from database
+    },
+    getUserById: () => {
+      return users.find((user)=>user.id===id)
+    }
+  },
+  Mutation: {
+    
+  }
 }
 
 // Create the Apollo Server instance
